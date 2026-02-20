@@ -19,6 +19,13 @@ import { createRedisClient } from './config/redis.config.js'
 export async function createApp(): Promise<Express> {
   const app = express()
 
+  // Trust proxy so Express recognises X-Forwarded-Proto and sets secure
+  // cookies correctly behind HTTPS reverse-proxies (Render, Cloudflare, etc.).
+  // Set TRUST_PROXY=true in your environment.
+  if (process.env.TRUST_PROXY === 'true') {
+    app.set('trust proxy', true)
+  }  
+
   // Security headers with Helmet
   app.use(
     helmet({
