@@ -1,0 +1,46 @@
+On branch security-fix
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   ../.claude/settings.local.json
+	modified:   ../.dockerignore
+	modified:   ../.env.example
+	modified:   ../.env.external.example
+	modified:   ../.env.internal.example
+	modified:   ../.gitignore
+	modified:   ../apps/api/package.json
+	modified:   ../apps/api/src/app.ts
+	modified:   ../apps/api/src/config/database.config.ts
+	modified:   ../apps/api/src/controllers/auth.controller.ts
+	modified:   ../apps/api/src/middleware/auth.middleware.ts
+	modified:   ../apps/api/src/middleware/csrf.middleware.ts
+	modified:   ../apps/api/src/middleware/db-metrics.middleware.ts
+	modified:   ../apps/api/src/middleware/logger.middleware.ts
+	modified:   ../apps/api/src/middleware/rate-limit.middleware.ts
+	modified:   ../apps/api/src/middleware/validation.middleware.ts
+	modified:   ../apps/api/src/routes/auth.routes.ts
+	modified:   ../apps/api/src/server.ts
+	modified:   ../apps/api/src/utils/db-retry.ts
+	modified:   ../apps/web/index.html
+	modified:   ../apps/web/src/router/index.ts
+	modified:   ../apps/web/src/stores/auth.store.ts
+	modified:   ../docker-compose.yml
+	modified:   ../docker/api.Dockerfile
+	modified:   ../docker/web.Dockerfile
+	modified:   ../package-lock.json
+	modified:   ../packages/auth/package.json
+	modified:   ../packages/auth/src/drivers/base.driver.ts
+	modified:   ../packages/auth/src/drivers/entra-id.driver.ts
+	modified:   ../packages/auth/src/drivers/mock.driver.ts
+	modified:   ../packages/auth/src/drivers/saml.driver.ts
+	modified:   ../packages/auth/src/index.ts
+	modified:   ../packages/config/src/schemas/api.config.schema.ts
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	../apps/api/src/instrumentation.ts
+	../apps/api/src/utils/logger.ts
+	../docker/nginx.conf
+	../packages/auth/src/utils/
+
+no changes added to commit (use "git add" and/or "git commit -a")

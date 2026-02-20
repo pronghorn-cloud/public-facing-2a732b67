@@ -1,0 +1,64 @@
+version: '3.8'
+
+services:
+  redis:
+    image: redis:7-alpine
+    container_name: template-redis
+    profiles:
+      - cache
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - template-network
+
+  api:
+    build:
+      context: .
+      dockerfile: docker/api.Dockerfile
+      target: development
+    container_name: template-api
+    environment:
+      NODE_ENV: development
+      PORT: 3000
+      SESSION_SECRET: dev-secret-change-in-production
+      SESSION_STORE: ${SESSION_STORE:-memory}
+      AUTH_DRIVER: mock
+      CORS_ORIGIN: http://localhost:5173
+      LOG_LEVEL: debug
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./apps/api/src:/app/apps/api/src
+      - ./packages:/app/packages
+    networks:
+      - template-network
+    command: npm run dev --workspace=apps/api
+
+  web:
+    build:
+      context: .
+      dockerfile: docker/web.Dockerfile
+      target: development
+    container_name: template-web
+    environment:
+      API_URL: http://api:3000
+      VITE_API_URL: http://localhost:3000/api/v1
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./apps/web/src:/app/apps/web/src
+      - ./apps/web/public:/app/apps/web/public
+      - ./packages:/app/packages
+    networks:
+      - template-network
+    command: npm run dev --workspace=apps/web -- --host 0.0.0.0
+
+networks:
+  template-network:
+    name: template-network
+    driver: bridge
