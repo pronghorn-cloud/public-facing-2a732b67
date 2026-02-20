@@ -19,9 +19,9 @@ export class MockAuthDriver extends BaseAuthDriver {
     super(config)
 
     // REQ-P2-04: Prevent mock auth driver from being used in production
-    if (process.env.NODE_ENV === 'production') {
+    if (process.env.NODE_ENV === 'production' && process.env.ALLOW_MOCK_IN_PRODUCTION !== 'true') {
       throw new Error(
-        'MockAuthDriver cannot be used in production. Set AUTH_DRIVER to "saml".'
+        'MockAuthDriver cannot be used in production. Set AUTH_DRIVER to "saml", or set ALLOW_MOCK_IN_PRODUCTION=true to override.'
       )
     }
 
